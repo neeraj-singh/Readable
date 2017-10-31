@@ -1,99 +1,45 @@
-# Readable API Server
+# API Server
 
-## Installation
+To install and start the API server, run the following commands in this directory:
 
-Install packages: `npm install`
-Launch server: `node server`
-Unless modified in `config.js` server will use port 5001
+* `npm install`
+* `node server`
 
+## Using The Server
 
-## API
-Use an Authorization header to work with your own data:
+### Include An Authorization Header
 
-`fetch(url, { headers: { 'Authorization': 'whatever-you-want' }})`
+All requests should use an **Authorization header** to work with your own data:
 
-The following endpoints are available:  
+```js
+fetch(
+    url,
+    {
+        headers: { 'Authorization': 'whatever-you-want' }
+    }
+)
+```
 
-`GET /categories`  
-  **USAGE:**   
-    Get all of the categories available for the app. List is found in categories.js.
-    Feel free to extend this list as you desire.    
+### Comment Counts
+Posts retrieved in a list or individually now contain comment counts in the format `post: { commentCount: 0 }`.  This should make it easier to display the number of comments a post has without having to call the comments endpoint for each post.   This count is updated whenever a comment is added or deleted via the `POST /comments` or `DELETE /comments/:id` endpoints.
 
-`GET /:category/posts`  
-  **USAGE:**    
-    Get all of the posts for a particular category   
+### API Endpoint
 
-`GET /posts`  
-  **USAGE:**    
-    Get all of the posts. Useful for the main page when no category is selected.  
+The following endpoints are available:
 
-`POST /posts`  
-  **USAGE:**  
-    Add a new post  
-  
-  **PARAMS:**   
-    id - UUID should be fine, but any unique id will work  
-    timestamp - timestamp in whatever format you like, you can use Date.now() if you like  
-    title - String  
-    body - String  
-    owner - String  
-    category: Any of the categories listed in categories.js. Feel free to extend this list as you desire.  
-
-`GET /posts/:id`  
-  **USAGE:**  
-    Get the details of a single post  
-
-`POST /posts/:id`  
-  **USAGE:**  
-    Used for voting on a post  
-
-  **PARAMS:**  
-    option - String: Either "upVote" or "downVote"  
-    
-`PUT /posts/:id`  
-  **USAGE:**  
-    Edit the details of an existing post  
-
-  **PARAMS:**  
-    title - String  
-    body - String  
-
-`DELETE /posts/:id`  
-  **USAGE:**  
-    Sets the deleted flag for a post to 'true'.   
-    Sets the parentDeleted flag for all child comments to 'true'.  
-  
-`GET /posts/:id/comments`  
-  **USAGE:**  
-    Get all the comments for a single post  
-
-`POST /comments`  
-  **USAGE:**  
-    Add a comment to a post  
-
-  **PARAMS:**  
-    id: Any unique ID. As with posts, UUID is probably the best here.  
-    timestamp: timestamp. Get this however you want.  
-    body: String  
-    owner: String  
-    parentId: Should match a post id in the database.  
-
-`GET /comments/:id`  
-  **USAGE:**  
-    Get the details for a single comment  
-
-`POST /comments/:id`  
-  **USAGE:**  
-    Used for voting on a comment.  
-
-`PUT /comments/:id`  
-  **USAGE:**  
-    Edit the details of an existing comment  
-  
-  **PARAMS:**  
-    timestamp: timestamp. Get this however you want.  
-    body: String  
-
-`DELETE /comments/:id`  
-  **USAGE:**  
-    Sets a comment's deleted flag to 'true'  
+| Endpoints       | Usage          | Params         |
+|-----------------|----------------|----------------|
+| `GET /categories` | Get all of the categories available for the app. List is found in `categories.js`. Feel free to extend this list as you desire. |  |
+| `GET /:category/posts` | Get all of the posts for a particular category. |  |
+| `GET /posts` | Get all of the posts. Useful for the main page when no category is selected. |  |
+| `POST /posts` | Add a new post. | **id** - UUID should be fine, but any unique id will work <br> **timestamp** - [Timestamp] Can in whatever format you like, you can use `Date.now()` if you like. <br> **title** - [String] <br> **body** - [String] <br> **author** - [String] <br> **category** -  Any of the categories listed in `categories.js`. Feel free to extend this list as you desire. |
+| `GET /posts/:id` | Get the details of a single post. | |
+| `POST /posts/:id` | Used for voting on a post. | **option** - [String]: Either `"upVote"` or `"downVote"`. |
+| `PUT /posts/:id` | Edit the details of an existing post. | **title** - [String] <br> **body** - [String] |
+| `DELETE /posts/:id` | Sets the deleted flag for a post to 'true'. <br> Sets the parentDeleted flag for all child comments to 'true'. | |
+| `GET /posts/:id/comments` | Get all the comments for a single post. | |
+| `POST /comments` | Add a comment to a post. | **id** - Any unique ID. As with posts, UUID is probably the best here. <br> **timestamp** - [Timestamp] Get this however you want. <br> **body** - [String] <br> **author** - [String] <br> **parentId** - Should match a post id in the database. |
+| `GET /comments/:id` | Get the details for a single comment. | |
+| `POST /comments/:id` | Used for voting on a comment. | **option** - [String]: Either `"upVote"` or `"downVote"`.  |
+| `PUT /comments/:id` | Edit the details of an existing comment. | **timestamp** - timestamp. Get this however you want. <br> **body** - [String] |
+| `DELETE /comments/:id` | Sets a comment's deleted flag to `true`. | &nbsp; |
