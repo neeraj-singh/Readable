@@ -4,7 +4,7 @@ Udacity Nanodegree React Project
 
 ## Setup
 
-Clone the repo : https://github.com/anirudhramanan/Readable
+Clone the repo : https://github.com/neeraj-singh/Readable
 
 ### Installing Server
 
@@ -16,4 +16,4 @@ Clone the repo : https://github.com/anirudhramanan/Readable
 
 1. cd readable-client
 2. npm install
-3. npm start
+3. npm start (Client will work at port 3000)
