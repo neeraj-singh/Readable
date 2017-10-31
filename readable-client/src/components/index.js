@@ -12,7 +12,7 @@ import EditPost from './post/EditPost'
 import HomePage from './home/HomePage'
 import PostDetail from './post/PostDetail'
 import LogoImage from '../images/readable-logo.png'
-import NewPostImage from '../images/newpost.png'
+
 
 class Index extends Component {
   static propTypes = {
@@ -34,7 +34,7 @@ class Index extends Component {
             <img src={LogoImage} width="200" height="48" />
           </Link>
           <Link className="new-post" to="/new">
-            <img src={NewPostImage} width="40" height="40" />
+            <button width="40" height="90" > Create Post</button>
           </Link>
         </div>
 
