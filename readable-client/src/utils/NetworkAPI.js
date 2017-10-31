@@ -32,8 +32,7 @@ export const deleteComment = (commentId) => {
   return fetch(`${API}/comments/${commentId}`, {
     method: 'DELETE',
     headers: headers
-  })
-    .then(res => res.json())
+  }).then(res => res.json())
 }
 
 export const voteComment = (commentId, option) => {
@@ -85,7 +84,7 @@ export const deletePost = (postId) => {
   return fetch(`${API}/posts/${postId}`, {
     method: 'DELETE',
     headers: headers
-  }).then(res => res.json())
+  })
 }
 
 // option is upVote or downVote
